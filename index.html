@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Situs Megalitikum Cibedug</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <header class="hero">
+    <h1>SITUS MEGALITIKUM<br />CIBEDUG</h1>
+    <p>Menelusuri Jejak Kuno Masyarakat Adat Banten</p>
+    <a href="virtual-tour.html" class="btn-hero">JELAJAHI SEJARAH</a>
+  </header>
+
+  <section class="about">
+    <div class="about-img-wrapper">
+      <img src="situs.png" alt="Ilustrasi Lebak Cibedug" class="about-img" />
+    </div>
+    <div class="about-content">
+      <h2>MENGENAL LEBAK CIBEDUG</h2>
+      <p>
+        Situs Lebak Cibedug merupakan peninggalan
+        kebudayaan masa megalitikum ( 2500-150 SM). Situs ini terdiri dari bangunan
+        utama yaitu punden berundak yang besar,
+        bertingkat-tingkat, dan tersusun dari bebatuan andesit
+        dan lempung. Di situs ini juga terdapat peninggalan Megalitikum lainnya yaitu Batu Paseuk dan Batu Sajadah
+        Situs Cibedug memiliki fungsi sebagai tempat ritual dan spritual. Situs Cibedug adalah kompleks peninggalan
+        zaman Megalitikum (zaman batu besar) yang terletak di Lebak, Banten. Ciri utamanya adalah
+        struktur 'Punden Berundak' bangunan bertingkat seperti piramida yang
+        digunakan untuk pemujaan arwah leluhur.
+      </p>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="card">
+      <img src="card.jpeg" alt="Batu Sejadah" />
+      <h3>BATU SAJADAH</h3>
+      <p>
+        Masyarakat Desa Cibedug menganggap bentuk batu ini menyerupai sajadah, tetapi secara
+        ilmiah belum ada penjelasan atau makna yang lebih spesifik terkait dengan batu tersebut
+      </p>
+    </div>
+    <div class="card active">
+      <img src="cardactive.jpeg" alt="Batu Paseuk" />
+      <h3>BATU PASEUK</h3>
+      <p>
+        Ditemukan oleh Abah Winata Jaya, Keturunan Aki Buyut Sarmanah dari Desa Cibedug yang
+        merupakan batu pertama dari sebuah arkeologis yang sebelumnya tidak diketahui.
+      </p>
+    </div>
+    <div class="card">
+      <img src="cards.jpeg" alt="Batu Bedug" />
+      <h3>BATU BEDUG</h3>
+      <p>
+        Batu bedug menurut masyarakat kampung cibedug memiliki kemampuan menghasilkan suara ketika tiba waktu solat dan
+        takbir. Kejadian ini terjadi sebelum masyarakat mengenal kendaraan dan teknologi seperti
+        televisi,telepon seluler.
+      </p>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <img src="3.jpeg" class="img-1" alt="Gallery 1" />
+    <img src="4.jpeg" class="img-2" alt="Gallery 2" />
+
+    <img src="nightfoto.jpeg" class="img-center" alt="Night View Cibedug" />
+
+    <img src="5.jpeg" class="img-3" alt="Gallery 3" />
+    <img src="6.jpeg" class="img-4" alt="Gallery 4" />
+  </section>
+
+  <footer>
+    <div class="map-wrapper">
+      <a href="https://maps.app.goo.gl/mtG3FL8JK8DwEtnZ9">
+        <img src="map.png" alt="Map Lokasi Cibedug" />
+      </a>
+    </div>
+    <div class="contact-info">
+      <h2>KUNJUNGI JEJAK LELUHUR</h2>
+
+      <h4>Addres</h4>
+      <p>Kampung Cibedug, Desa Citorek Barat, Kecamatan Cibeber, Kabupaten Lebak, Banten.</p>
+
+      <h4>Tips</h4>
+      <p>
+        Gunakan panduan penduduk lokal untuk akses terbaik.<br />Hormati
+        aturan adat dan jaga kebersihan situs.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Panggil header.html
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      });
+
+    // 2. Pantau semua aktivitas klik di website (Event Delegation Global)
+    document.addEventListener('click', function (e) {
+
+      const menuIconTarget = e.target.closest('.menu-icon');
+      const settingsDropdown = document.querySelector('.settings-dropdown');
+      const actualMenuIcon = document.querySelector('.menu-icon');
+
+      // A. Jika tombol tiga garis diklik
+      if (menuIconTarget && settingsDropdown) {
+        settingsDropdown.classList.toggle('show');
+
+        // Ubah ikon ☰ menjadi silang (X)
+        if (settingsDropdown.classList.contains('show')) {
+          actualMenuIcon.innerHTML = '✖';
+        } else {
+          actualMenuIcon.innerHTML = '☰';
+        }
+      }
+      // B. Jika user mengklik area lain di luar menu, tutup menunya otomatis
+      else if (settingsDropdown && actualMenuIcon && !settingsDropdown.contains(e.target)) {
+        settingsDropdown.classList.remove('show');
+        actualMenuIcon.innerHTML = '☰';
+      }
+
+      // C. Script untuk Page Transition (Animasi Pindah Halaman)
+      const linkTarget = e.target.closest('a');
+      if (linkTarget) {
+        const targetHref = linkTarget.getAttribute('href');
+        if (targetHref && targetHref !== '#' && !targetHref.startsWith('#') && linkTarget.getAttribute('target') !== '_blank') {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = targetHref;
+          }, 400); // 400ms sesuai durasi CSS Anda
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>
