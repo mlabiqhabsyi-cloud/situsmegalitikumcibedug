@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Situs Megalitikum Cibedug</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <section class="gallery-slider-section">
+        <div class="slider-overlay"></div>
+
+        <div class="gallery-header">
+            <h2>Galeri Kami</h2>
+            <p>Jelajahi pesona masa lalu Situs Megalitikum Cibedug</p>
+        </div>
+        <div class="slider-container">
+
+            <section class="gallery-slider-section">
+                <div class="slider-overlay"></div>
+
+                <div class="slider-container">
+                    <button class="slider-btn prev-btn" onclick="moveSlider(-1)">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                    <div class="slider-track">
+
+                        <div class="slider-item">
+                            <img src="herofoto.jpeg" alt="Foto 1">
+                            <h3>Punden Berundak</h3>
+                            <p>Struktur bertingkat yang menjadi pusat pemujaan roh leluhur, menunjukkan tingginya
+                                peradaban pada masa itu.</p>
+                        </div>
+
+                        <div class="slider-item">
+                            <img src="sumurcibedug.jpeg" alt="Foto 2">
+                            <h3>Sumur Cibedug</h3>
+                            <p>Dalam rangkaian Situs Cibedug, terdapat sebuah sumur yang merupakan struktur fisik yang
+                                terlihat, namun seiring kali posisinya tidak stabil atau berubah-ubah. Sumur ini
+                                terletak di antara dua sungai atau mata air, yaitu Mata Air Cimanggu dan Mata Air
+                                Cibedug</p>
+                        </div>
+
+                        <div class="slider-item active">
+                            <img src="batukesucian.jpeg" alt="Foto 3">
+                            <h3>Batu Kesucian</h3>
+                            <p>Batu ini menjadi puncak dari rangkaian situs Cibedug dan dianggap sebagai penanda arah
+                                oleh masyarakt Desa Cibedug. Secara spiritual, batu ini diinterpretasikan sebagai
+                                penghubung antara Adam dan Hawa. Menurut Profesor Truman tempat ini dahulu menjadi
+                                tempat perkumpulan masyarakat atau pusat pemerintahan.</p>
+                        </div>
+
+                        <div class="slider-item">
+                            <img src="batusajadah.jpeg" alt="Foto 4">
+                            <h3>Batu Sajadah</h3>
+                            <p>Masyarakat Desa Cibedug menganggap bentuk batu ini menyerupai sajadah, tetapi secara
+                                ilmiah belum ada penjelasan atau makna yang lebih spesifik terkait dengan batu tersebut.
+                            </p>
+                        </div>
+
+                        <div class="slider-item">
+                            <img src="batupaseuk.jpeg" alt="Foto 5">
+                            <h3>Batu Paseuk</h3>
+                            <p>Ditemukan oleh Abah Winata Jaya, Keturunan Aki Buyut Sarmanah dari Desa Cibedug yang
+                                merupakan batu pertama dari sebuah arkeologis yang sebelumnya tidak diketahui.</p>
+                        </div>
+
+                        <div class="slider-item">
+                            <img src="batubedug.jpeg" alt="Foto 6">
+                            <h3>Batu Bedug</h3>
+                            <p>Batu Bedug konon memiliki kemampuan menghasilkan suara ketika tiba waktu sholat dan
+                                takbir. Fenomena ini terjadi sebelum masyarakat mengenal kendaraan dan teknologi seperti
+                                radio, televisi, dan ponsel.</p>
+                        </div>
+
+                        <div class="slider-item">
+                            <img src="batukursi.jpeg" alt="Foto 6">
+                            <h3>Batu Kursi</h3>
+                            <p>Batu ini dikenal sebagai Batu Kursi karena bentuknya menyerupai kursi, meskipun sampai
+                                saat ini belum ada penelitian ilmiah yang pasti.</p>
+                        </div>
+
+                        <div class="slider-item">
+                            <img src="saung.jpeg" alt="Foto 7">
+                            <h3>Saung</h3>
+                            <p>Batu yang terletak didalam saung dianggap memiliki nila sakral oleh masyarakat dan dijaga
+                                dengan ketat oleh pihak kasepuhan. Akses untuk memegang batu ini tidak sembarangan,
+                                karena dipercayai memiliki kekuatan atau energi spiritual yang harus dihormati dan
+                                dijaga hati-hati. perlu dilakukan serangkaian syarat yang ditetapkan oleh olot atau
+                                pemimpin spiritual lokal, sebagai bentuk penghormatan.</p>
+                        </div>
+
+
+                    </div>
+
+                    <button class="slider-btn next-btn" onclick="moveSlider(1)">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <script>
+
+                // 1. Panggil header.html
+                fetch('header.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('header-placeholder').innerHTML = data;
+                    });
+
+                // 2. Pantau semua aktivitas klik di website (Event Delegation Global)
+                document.addEventListener('click', function (e) {
+
+                    const menuIconTarget = e.target.closest('.menu-icon');
+                    const settingsDropdown = document.querySelector('.settings-dropdown');
+                    const actualMenuIcon = document.querySelector('.menu-icon');
+
+                    // A. Jika tombol tiga garis diklik
+                    if (menuIconTarget && settingsDropdown) {
+                        settingsDropdown.classList.toggle('show');
+
+                        // Ubah ikon ☰ menjadi silang (X)
+                        if (settingsDropdown.classList.contains('show')) {
+                            actualMenuIcon.innerHTML = '✖';
+                        } else {
+                            actualMenuIcon.innerHTML = '☰';
+                        }
+                    }
+                    // B. Jika user mengklik area lain di luar menu, tutup menunya otomatis
+                    else if (settingsDropdown && actualMenuIcon && !settingsDropdown.contains(e.target)) {
+                        settingsDropdown.classList.remove('show');
+                        actualMenuIcon.innerHTML = '☰';
+                    }
+
+                    // C. Script untuk Page Transition (Animasi Pindah Halaman)
+                    const linkTarget = e.target.closest('a');
+                    if (linkTarget) {
+                        const targetHref = linkTarget.getAttribute('href');
+                        if (targetHref && targetHref !== '#' && !targetHref.startsWith('#') && linkTarget.getAttribute('target') !== '_blank') {
+                            e.preventDefault();
+                            document.body.classList.add('fade-out');
+                            setTimeout(() => {
+                                window.location.href = targetHref;
+                            }, 400); // 400ms sesuai durasi CSS Anda
+                        }
+                    }
+                });
+
+                const items = document.querySelectorAll('.slider-item');
+                let currentIndex = 2; // Memulai dari index 2 (Gambar ke-3 di tengah)
+
+                function updateSlider() {
+                    items.forEach((item, index) => {
+                        // Reset semua kelas
+                        item.classList.remove('active', 'prev', 'next', 'hidden-left', 'hidden-right');
+
+                        if (index === currentIndex) {
+                            item.classList.add('active'); // Tengah
+                        } else if (index === currentIndex - 1) {
+                            item.classList.add('prev'); // Kiri
+                        } else if (index === currentIndex + 1) {
+                            item.classList.add('next'); // Kanan
+                        } else if (index < currentIndex - 1) {
+                            item.classList.add('hidden-left'); // Tersembunyi di kiri
+                        } else {
+                            item.classList.add('hidden-right'); // Tersembunyi di kanan
+                        }
+                    });
+                }
+
+                function moveSlider(direction) {
+                    currentIndex += direction;
+
+                    // Mengatur batasan agar tidak melebihi jumlah foto (Looping)
+                    if (currentIndex < 0) {
+                        currentIndex = items.length - 1;
+                    } else if (currentIndex >= items.length) {
+                        currentIndex = 0;
+                    }
+
+                    updateSlider();
+                }
+
+                // Panggil pertama kali untuk mengatur posisi awal
+                updateSlider();
+
+            </script>
+</body>
+
+</html>

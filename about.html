@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <header class="about-hero">
+    <h1>About Us<br />
+      <span>(TIM BEDUGAR)</span>
+    </h1>
+    <p>Jendela Dari Masa Lalu Untuk Masa Depan</p>
+  </header>
+
+  <section class="content-container">
+    <div class="identity-card">
+      <h2>Identitas Kami</h2>
+      <img src="sekolahabout.webp" alt="Ilustrasi Sekolah" />
+
+      <div class="identity-info">
+        <p><strong>Instansi</strong> : Madrasah Aliyah Negeri 1 Lebak</p>
+        <p>
+          <strong>Lokasi</strong> : Jl. Pasir Ona, Rangkasbitung Timur., Kec.
+          Rangkasbitung, Banten 42313.
+        </p>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="team-card">
+        <div class="team-member">
+          <img src="fotoabout.jpg" alt="Foto Labiq" class="avatar">
+          <p>Muhammad Labiq Habsyi</p>
+        </div>
+
+        <div class="team-member">
+          <img src="fotoabout.jpg" alt="Foto Farida" class="avatar">
+          <p>Siti Farida Navisa</p>
+        </div>
+
+        <div class="team-member">
+          <img src="fotoabout.jpg" alt="Foto Ferdi" class="avatar">
+          <p>Ferdi Hadiansyah</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-item">
+          <i class="fa-brands fa-instagram"></i>
+          <span>man1lebak.official</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>(+62 813-2462-6597)</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-regular fa-envelope"></i>
+          <span>man_rangkasbitung@yahoo.com</span>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+  </section>
+
+  <script>
+    // 1. Panggil header.html
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      });
+
+    // 2. Pantau semua aktivitas klik di website (Event Delegation Global)
+    document.addEventListener('click', function (e) {
+
+      const menuIconTarget = e.target.closest('.menu-icon');
+      const settingsDropdown = document.querySelector('.settings-dropdown');
+      const actualMenuIcon = document.querySelector('.menu-icon');
+
+      // A. Jika tombol tiga garis diklik
+      if (menuIconTarget && settingsDropdown) {
+        settingsDropdown.classList.toggle('show');
+
+        // Ubah ikon ☰ menjadi silang (X)
+        if (settingsDropdown.classList.contains('show')) {
+          actualMenuIcon.innerHTML = '✖';
+        } else {
+          actualMenuIcon.innerHTML = '☰';
+        }
+      }
+      // B. Jika user mengklik area lain di luar menu, tutup menunya otomatis
+      else if (settingsDropdown && actualMenuIcon && !settingsDropdown.contains(e.target)) {
+        settingsDropdown.classList.remove('show');
+        actualMenuIcon.innerHTML = '☰';
+      }
+
+      // C. Script untuk Page Transition (Animasi Pindah Halaman)
+      const linkTarget = e.target.closest('a');
+      if (linkTarget) {
+        const targetHref = linkTarget.getAttribute('href');
+        if (targetHref && targetHref !== '#' && !targetHref.startsWith('#') && linkTarget.getAttribute('target') !== '_blank') {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = targetHref;
+          }, 400); // 400ms sesuai durasi CSS Anda
+        }
+      }
+    });
+
+  </script>
+
+
+</body>
+
+</html>

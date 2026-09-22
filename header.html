@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <nav>
+
+        <a class="nav-logo">
+            <img src="BEDUGARLOGO.png" alt="Logo BedugAR">
+            <span class="logo-text">BedugAR</span>
+        </a>
+        <div class="nav-links">
+            <a href="about.html" class="li-nav">About us</a>
+            <a href="index.html" class="li-nav">Home</a>
+            <a href="gallery.html" class="li-nav">Gallery</a>
+        </div>
+
+
+        <div class="menu-container">
+            <div class="menu-icon">☰</div>
+
+            <div class="settings-dropdown">
+                <a href="virtual-tour.html" class="setting-option">
+                    <i class="fa-solid fa-vr-cardboard"></i> Virtual Tour
+                </a>
+                <a href="mapminecraft.html" class="setting-option">
+                    <i class="fa-solid fa-cube"></i> Peta Minecraft
+                </a>
+                <a href="index.html" class="setting-option">
+                    <i class="fa-solid fa-landmark"></i> Home
+                </a>
+                <a href="gallery.html" class="setting-option">
+                    <i class="fa-solid fa-images"></i> Gallery
+                </a>
+                <a href="about.html" class="setting-option">
+                    <i class="fa-solid fa-users"></i> About Us
+                </a>
+            </div>
+        </div>
+        </div>
+    </nav>
+
+    <script>
+
+        // 1. Script untuk Page Transition (Animasi Pindah Halaman)
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                const target = this.getAttribute('href');
+
+                // Cek apakah target valid, BUKAN link kosong, dan BUKAN link yang diawali '#'
+                if (target && target !== '#' && !target.startsWith('#') && this.getAttribute('target') !== '_blank') {
+                    e.preventDefault(); // Hentikan perpindahan instan
+
+                    document.body.classList.add('fade-out'); // Jalankan animasi keluar
+
+                    // Tunggu 400ms (sesuai durasi CSS), lalu pindah halaman
+                    setTimeout(() => {
+                        window.location.href = target;
+                    }, 400);
+                }
+            });
+        });
+
+        // Script untuk Menu Dropdown pada Ikon 3 Garis
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuIcon = document.querySelector('.menu-icon');
+            const settingsDropdown = document.querySelector('.settings-dropdown');
+
+            if (menuIcon && settingsDropdown) {
+                // Memunculkan/menyembunyikan menu saat ikon 3 garis diklik
+                menuIcon.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    settingsDropdown.classList.toggle('show');
+
+                    // Opsional: Mengubah ikon garis tiga menjadi silang (X) saat terbuka
+                    if (settingsDropdown.classList.contains('show')) {
+                        menuIcon.innerHTML = '✖';
+                    } else {
+                        menuIcon.innerHTML = '☰';
+                    }
+                });
+
+                // Menutup menu otomatis jika user mengklik sembarang tempat di luar menu
+                window.addEventListener('click', function (e) {
+                    if (!settingsDropdown.contains(e.target) && !menuIcon.contains(e.target)) {
+                        settingsDropdown.classList.remove('show');
+                        menuIcon.innerHTML = '☰'; // Kembalikan ke ikon awal
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
